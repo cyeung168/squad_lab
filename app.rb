@@ -99,6 +99,9 @@ end
 
 # DESTROY HOUSE — Route used for deleting an existing house
 delete '/houses/:house_id' do
+  house_id = params[:house_id].to_i
+  @conn.exec("DELETE FROM house WHERE id = $1", [house_id])
+  redirect to '/houses'
 end
 
 # DESTROY STUDENT — Route used for deleting an existing student in a house
