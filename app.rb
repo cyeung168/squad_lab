@@ -22,10 +22,21 @@ end
 
 # INDEX // SHOW HOUSES — Route that shows all the houses
 get '/houses' do
+  # Create a HOUSE var as an empty array
+  # As you loop, push new houses into the houses array
+  houses = []
+  @conn.exec("SELECT * FROM house") do |result| #SQL query to get me all the results of the house table
+    result.each do |house|
+      houses << house
+    end
+  end
+  @houses = houses # Creating an instance variable for house to call in index erb
+  erb :index
 end
 
 # SHOW FORM TO CREATE NEW HOUSE — Route that shows a form that allows user to create a new house
 get '/houses/new' do
+  erb :new
 end
 
 # SHOW HOUSE — Route that shows information about a single house
