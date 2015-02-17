@@ -73,14 +73,24 @@ end
 
 # CREATE HOUSE — Route used for creating a new house
 post '/houses' do
+  name = params[:name]
+  mascot = params[:mascot]
+  @conn.exec("INSERT INTO house (name, mascot) VALUES ($1, $2)", [name, mascot])
+  redirect to '/houses'
 end
 
 # CREATE STUDENT — Route used for creating a new student in an existing house
 post '/houses/:house_id/students' do
 end
 
+
 # UPDATE HOUSE – Route used for editing an existing house
 put '/houses/:house_id' do
+  house_id = params[:house_id].to_i
+  name = params[:name]
+  mascot = params[:mascot]
+  @conn.exec("UPDATE house SET name = $1, mascot = $2 WHERE id = $3", [name, mascot, house_id])
+  redirect to '/houses'
 end
 
 # UPDATE STUDENT — Route used for editing an existing student in a house
