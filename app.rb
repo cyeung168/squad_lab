@@ -57,6 +57,10 @@ end
 
 # SHOW HOUSE STUDENTS — Route that shows all students for an individual house
 get '/houses/:house_id/students' do
+  house_id = params[:house_id].to_i
+  students = @conn.exec("SELECT * FROM house WHERE id = ($1)", [house_id]) 
+  @house = house[0] # So that only the item at 0 index is returned— Also the first of the array
+  erb :show_students
 end
 
 # SHOW STUDENT OF HOUSE — Route that shows information about an individual student in a house
