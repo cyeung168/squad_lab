@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ALL HOUSES</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<table>
+  <thead>
+    <th>ID</th>
+    <th>House Name</th>
+    <th>More Info</th>
+  </thead>
+  <% @houses.each do |house| %>
+  <tr>
+    <td><%= house["id"] %></td>
+    <td><%= house["name"] %></td>
+    <td><button><a href="/houses/<%= house["id"] %>">See House</a></button></td>
+  </tr>
+  <% end %>
+</table><br>
+<button><a href="/houses/new">Add a House</a></button>
+  
+</body>
+</html>
