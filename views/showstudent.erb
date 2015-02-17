@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<h1>All about <%= @student["name"] %></h1>
+<table>
+<tr>
+  <td><%= @student["id"] %></td>
+  <td><%= @student["name"] %></td>
+  <td><%= @student["patronus"] %></td>
+  <td><%= @house["name"] %></td>
+  <td><button><a href="/students/<%= @student["id"] %>/edit">Edit student</a></button></td>
+</tr>
+</table>
+
+<button><a href="/students/<%= @student["id"] %>/students">See students</a></button>
+  
+</body>
+</html>

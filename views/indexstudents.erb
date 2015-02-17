@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<h1>Students in <%= @house["name"] %></h1>
+<table>
+  <thead>
+    <th>ID</th>
+    <th>student Name</th>
+    <th>More Info</th>
+  </thead>
+  <% @students.each do |student| %>
+  <tr>
+    <td><%= student["id"] %></td>
+    <td><%= student["name"] %></td>
+    <td><button><a href="/houses/<%= @house["id"] %>/students/<%= student["id"] %>">See Student</a></button></td>
+  </tr>
+  <% end %>
+</table><br>
+<button><a href="/houses/<%= @house["id"] %>/students/new">Add a Student</a></button>
+  
+</body>
+</html>
+
