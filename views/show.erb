@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<h1>All about <%= @house["name"] %></h1>
+<table>
+<tr>
+  <td><%= @house["id"] %></td>
+  <td><%= @house["name"] %></td>
+  <td><%= @house["mascot"] %></td>
+  <td><button><a href="/houses/<%= @house["id"] %>/edit">Edit House</a></button></td>
+</tr>
+</table>
+
+  
+</body>
+</html>

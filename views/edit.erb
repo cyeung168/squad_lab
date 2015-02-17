@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Make Changes to house</title>
+</head>
+<body>
+
+<h1>Make Changes to <%= @house["name"] %></h1>
+<form action="/houses/<%= @house["id"] %>" method="post">
+  <input type="hidden" name="_method" value="put">
+    <label for="name">Name:</label>
+    <input type="type" name="name" autofocus>
+    <label for="mascot">Mascot:</label>
+    <input type="type" name="mascot">
+  <input type="submit" value="Update house">
+</form>
+
+<p><form action="/houses/<%= @house["id"] %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete house">
+</form></p>
+
+</body>
+</html>

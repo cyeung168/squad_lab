@@ -40,27 +40,35 @@ get '/houses/new' do
 end
 
 # SHOW HOUSE — Route that shows information about a single house
-get 'houses/:house_id' do
+get '/houses/:house_id' do
+  house_id = params[:house_id].to_i
+  house = @conn.exec("SELECT * FROM house WHERE id = ($1)", [house_id]) 
+  @house = house[0] # So that only the item at 0 index is returned— Also the first of the array
+  erb :show
 end
 
 # SHOW FORM TO EDIT HOUSE — Route that shows a form that allows user to edit an existing house
-get 'houses/:house_id/edit' do 
+get '/houses/:house_id/edit' do 
+  house_id = params[:house_id].to_i
+  house = @conn.exec("SELECT * FROM house WHERE id = ($1)", [house_id]) 
+  @house = house[0] # So that only the item at 0 index is returned— Also the first of the array
+  erb :edit
 end
 
 # SHOW HOUSE STUDENTS — Route that shows all students for an individual house
-get 'houses/:house_id/students' do
+get '/houses/:house_id/students' do
 end
 
 # SHOW STUDENT OF HOUSE — Route that shows information about an individual student in a house
-get 'houses/:house_id/students/:student_id' do
+get '/houses/:house_id/students/:student_id' do
 end
 
 # SHOW FORM TO NEW STUDENT OF HOUSE — Route that shows a form to create a new student for a house
-get 'houses/:house_id/students/new' do
+get '/houses/:house_id/students/new' do
 end
 
 # SHOW FORM TO EDIT STUDENT OF HOUSE — Route that shows a form to edit a student's information
-get 'houses/:house_id/students/:student_id/edit' do
+get '/houses/:house_id/students/:student_id/edit' do
 end
 
 # CREATE HOUSE — Route used for creating a new house
