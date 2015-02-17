@@ -70,21 +70,26 @@ get '/houses/:house_id/students' do
   erb :indexstudents
 end
 
-# SHOW STUDENT OF HOUSE — Route that shows information about an individual student in a house
-get '/houses/:house_id/students/:student_id' do
-  student_id = params[:student_id].to_i
-  student = @conn.exec("SELECT * FROM students WHERE id = $1", [student_id])
-  @student = student[0]
-  
+# SHOW FORM TO NEW STUDENT OF HOUSE — Route that shows a form to create a new student for a house
+get '/houses/:house_id/students/new' do
   house_id = params[:house_id].to_i
   house = @conn.exec("SELECT * FROM house WHERE id = $1", [house_id]) 
   @house = house[0]
-  erb :showstudent
+
+  erb :newstudent
 end
 
-# SHOW FORM TO NEW STUDENT OF HOUSE — Route that shows a form to create a new student for a house
-get '/houses/:house_id/students/new' do
-  erb :newstudent
+# SHOW STUDENT OF HOUSE — Route that shows information about an individual student in a house
+get '/houses/:house_id/students/:student_id' do
+  house_id = params[:house_id].to_i
+  house = @conn.exec("SELECT * FROM house WHERE id = $1", [house_id]) 
+  @house = house[0]
+
+  student_id = params[:student_id].to_i
+  student = @conn.exec("SELECT * FROM students WHERE id = $1", [student_id])
+  @student = student[0]
+
+  erb :showstudent
 end
 
 # SHOW FORM TO EDIT STUDENT OF HOUSE — Route that shows a form to edit a student's information
@@ -101,6 +106,15 @@ end
 
 # CREATE STUDENT — Route used for creating a new student in an existing house
 post '/houses/:house_id/students' do
+  house_id = params[:house_id].to_i
+  house = @conn.exec("SELECT * FROM house WHERE id = $1", [house_id]) 
+  @house = house[0]
+
+  name = params[:name]
+  age = params[:age]
+  patronus = params[:patronus]
+  @conn.exec("INSERT INTO students (name, age, patronus) VALUES ($1, $2, $3)", [name, age, patronus])
+  redirect to '/houses/:house_id/students'
 end
 
 
